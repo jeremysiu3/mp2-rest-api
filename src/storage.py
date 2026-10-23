@@ -22,17 +22,15 @@ class DatasetStorage:
         if item is None:
             logger.debug(f"Dataset not found: id={dataset_id}")
             return None
-        logger.debug(f"Retrieved dataset: id={dataset_id}")
+        logger.debug(f"Retrieved dataset copy: id={dataset_id}, rows={len(item['data'])}")
         return item["data"].copy()
 
     def get_metadata(self, dataset_id):
         """Return the dataset metadata, or None."""
         item = self._store.get(dataset_id)
         if item is None:
-            logger.debug(f"Metadata not found: id={dataset_id}")
             return None
         df = item["data"]
-        logger.debug(f"Retrieved metadata: id={dataset_id}")
         return {
             "id": dataset_id,
             "filename": item["filename"],
