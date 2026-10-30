@@ -1,0 +1,5 @@
+# MP2 - DS3500 - Jeremy Siu
+
+## Summary
+
+This FastAPI REST API application uploads, cleans, and retrieves CSV datasets. There are 4 endpoints. First, there's GET /health which returns the status and version of the application. Next, there's POST /upload which is where a client can upload a CSV and it will return its dataset id, filename, and number of rows. Then, there's GET /datasets/{id} which returns stored rows with an optional limit of at least 1. Finally, there's POST /datasets/{id}/process which validates and cleans the stored data using the data_pipeline that I created in MP1. This endpoint takes a JSON config for required and numeric columns, duplicate removal, missing-value handling, and outlier removal. It then creates a cleaning report comparing the row count before and after. Invalid requests return errors such as 404 for a missing dataset and 400 for bad files or config. Middleware gives every request an ID, returns it in the X-Request-ID header, and logs the request at INFO, WARNING, or ERROR based on its status. This application is tested using FastAPI's TestClient.
